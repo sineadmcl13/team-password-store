@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'tps'
@@ -25,15 +25,17 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
 
-//    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-security")
 
      //ViewResolver Dependencies
     compile ("org.thymeleaf:thymeleaf:3.0.2.RELEASE")
     compile ("org.thymeleaf:thymeleaf-spring4:3.0.2.RELEASE")
 
+    //WebJars
+    compile ("org.webjars:jquery:3.1.1")
+    compile ("org.webjars:bootstrap:3.3.7-1")
 
     testCompile("junit:junit")
 }
