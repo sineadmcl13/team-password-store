@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class DashboardController {
 
-    private static String GREETING = "home/greeting";
-
+    private static String DASHBOARD = "home/dashboard";
 
     @RequestMapping("/home")
     public String getDashboard(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
-        return GREETING;
+        return DASHBOARD;
     }
+
 
 }
