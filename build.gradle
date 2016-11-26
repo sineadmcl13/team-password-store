@@ -49,6 +49,7 @@ dependencies {
     //Database connections
 //    compile("org.springframework:spring-jdbc")
     compile("org.springframework.boot:spring-boot-starter-jdbc:1.4.2.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("mysql:mysql-connector-java:6.0.5")
 
      //ViewResolver Dependencies
@@ -60,13 +61,16 @@ dependencies {
     compile("org.webjars:jquery:3.1.1")
     compile("org.webjars:bootstrap:3.3.7-1")
     compile("org.webjars:font-awesome:4.7.0")
+    compile("org.webjars:datatables:1.10.12-1")
 
     compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test:1.4.2.RELEASE")
     testCompile("org.springframework.security:spring-security-test:4.2.0.RELEASE")
-
+    testCompile("com.h2database:h2:1.4.193")
+    testCompile("nl.jqno.equalsverifier:equalsverifier:2.1.7")
+    testCompile("org.meanbean:meanbean:2.0.3")
 }
 
 
