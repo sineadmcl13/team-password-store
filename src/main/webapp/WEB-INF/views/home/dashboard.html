@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{templates/masterTemplate}">
+	  layout:decorate="~{templates/masterTemplate}" xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
 <section layout:fragment="custom-content">
-	<p>This is a custom content that you can provide</p>
+	<table id="listTable" class="table table-hover">
+		<thead>
+		<tr>
+			<th><input type="checkbox" /></th>
+			<th>Account</th>
+			<th>Website</th>
+			<th>Username</th>
+			<th>Password</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="mItem : ${account_details}">
+			<td><input type="checkbox" /></td>
+			<td><label type="text"
+					   th:text="${account_details.accountName}" /></td>
+			<td><a th:href="${account_details.accountWebsite}"
+					   th:text="${account_details.accountWebsite}" /></td>
+			<td><label type="text"
+					   th:text="${account_details.username}" /></td>
+			<td><label type="text"
+					   th:text="${account_details.passwordHash}" /></td>
+		</tr>
+		</tbody>
+	</table>
+	<script type="application/javascript">
+		$(document).ready(function(){
+			$('#listTable').DataTable();
+			console.log("hello");
+		});
+	</script>
 </section>
 </body>
 </html>
