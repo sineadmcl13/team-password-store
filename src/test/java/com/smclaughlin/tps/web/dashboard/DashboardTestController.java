@@ -29,7 +29,7 @@ public class DashboardTestController extends IntegrationTest {
     @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "/test_db/dashboard/beforeTestDashboardModel.sql")
     public void testDashboardModel() throws Exception{
 
-        AccountDetails accountDetails = new AccountDetails(1L, "admin@test.com", "password", "password");
+        AccountDetails accountDetails = new AccountDetails(1L, "testAccount", "google.com", "admin@test.com", "password", "password");
 
         mockMvc.perform(get("/home"))
                 .andExpect(model().attribute("account_details", equalTo(accountDetails)));

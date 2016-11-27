@@ -16,6 +16,8 @@ public class AccountDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String accountName;
+    private String accountWebsite;
     private String username;
     private String passwordSalt;
     private String passwordHash;
@@ -23,8 +25,11 @@ public class AccountDetails {
     public AccountDetails() {
     }
 
-    public AccountDetails(Long id, String username, String passwordSalt, String passwordHash) {
+    public AccountDetails(Long id, String accountName, String accountWebsite,
+                          String username, String passwordSalt, String passwordHash) {
         this.id = id;
+        this.accountName = accountName;
+        this.accountWebsite = accountWebsite;
         this.username = username;
         this.passwordSalt = passwordSalt;
         this.passwordHash = passwordHash;
@@ -36,6 +41,22 @@ public class AccountDetails {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getAccountWebsite() {
+        return accountWebsite;
+    }
+
+    public void setAccountWebsite(String accountWebsite) {
+        this.accountWebsite = accountWebsite;
     }
 
     public String getUsername() {
@@ -69,6 +90,8 @@ public class AccountDetails {
         AccountDetails that = (AccountDetails) o;
 
         return Objects.equals(id, that.id) &&
+                Objects.equals(accountName, that.accountName) &&
+                Objects.equals(accountWebsite, that.accountWebsite) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(passwordSalt, that.passwordSalt) &&
                 Objects.equals(passwordHash, that.passwordHash);
@@ -76,7 +99,7 @@ public class AccountDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, passwordSalt, passwordHash);
+        return Objects.hash(id, accountName, accountWebsite, username, passwordSalt, passwordHash);
     }
 
 }
