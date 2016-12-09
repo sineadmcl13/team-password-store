@@ -1,4 +1,4 @@
-package com.smclaughlin.tps.web.security;
+package com.smclaughlin.tps.security;
 
 import com.smclaughlin.tps.IntegrationTest;
 import org.junit.Before;
@@ -83,7 +83,7 @@ public class LoginTestController extends IntegrationTest {
 
         mockMvc.perform(get("/logout"))
                 .andExpect(unauthenticated())
-                .andExpect(redirectedUrl("/login?logout"));
+                .andExpect(redirectedUrl(ABSOLUTE_PATH+"login"));
 
     }
 

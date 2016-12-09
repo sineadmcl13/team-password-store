@@ -1,6 +1,4 @@
-package com.smclaughlin.tps.web.entities;
-
-import com.smclaughlin.tps.entities.AccountDetails;
+package com.smclaughlin.tps.entities;
 
 /**
  * Created by sineadmclaughlin on 26/11/2016.

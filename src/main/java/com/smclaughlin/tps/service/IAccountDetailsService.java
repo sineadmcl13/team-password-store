@@ -13,4 +13,18 @@ public interface IAccountDetailsService {
      * @return @see AccountDetails.class
      */
     AccountDetails getAccountDetailsById(Long id);
+
+    /**
+     * Persists a new AccountDetails object to storage
+     * @param accountDetails - the object of type AccountDetails to be saved
+     * @return the saved AccountDetails
+     */
+    AccountDetails createNewAccountDetails(AccountDetails accountDetails);
+
+    /**
+     * Updates the passed AccountDetails to storage
+     * @param accountDetails - the object of type AccountDetails to be saved
+     * @return the saved AccountDetails
+     */
+    AccountDetails saveAccountDetails(AccountDetails accountDetails);
 }

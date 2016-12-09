@@ -1,4 +1,4 @@
-package com.smclaughlin.tps.web;
+package com.smclaughlin.tps.web.dashboard;
 
 import com.smclaughlin.tps.service.IAccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -18,4 +18,14 @@ public class AccountDetailsService implements IAccountDetailsService {
     public AccountDetails getAccountDetailsById(Long id) {
         return accountDetailsDao.getAccountDetailsById(id);
     }
+
+    @Override
+    public AccountDetails saveAccountDetails(AccountDetails accountDetails) {
+        return accountDetailsDao.saveAccountDetails(accountDetails);
+    }
+
+    @Override
+    public AccountDetails createNewAccountDetails(AccountDetails accountDetails) {
+        return accountDetailsDao.createNewAccountDetails(accountDetails);
+    }
 }

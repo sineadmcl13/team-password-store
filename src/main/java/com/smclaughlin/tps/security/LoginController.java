@@ -1,4 +1,4 @@
-package com.smclaughlin.tps.web.security;
+package com.smclaughlin.tps.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

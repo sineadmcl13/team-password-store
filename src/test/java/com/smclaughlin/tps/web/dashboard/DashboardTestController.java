@@ -1,10 +1,11 @@
 package com.smclaughlin.tps.web.dashboard;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
 import org.junit.Test;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.jdbc.Sql;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,7 +27,8 @@ public class DashboardTestController extends IntegrationTest {
 
     @Test
     @WithMockUser(username="user", roles = "USER")
-    @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "/test_db/dashboard/beforeTestDashboardModel.sql")
+    @DatabaseSetup("/test_db/dashboard/beforeTestDashboardModel.xml")
+    @DatabaseTearDown
     public void testDashboardModel() throws Exception{
 
         AccountDetails accountDetails = new AccountDetails(1L, "testAccount", "google.com", "admin@test.com", "password", "password");

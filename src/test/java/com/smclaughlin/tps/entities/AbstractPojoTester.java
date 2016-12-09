@@ -1,4 +1,4 @@
-package com.smclaughlin.tps.web.entities;
+package com.smclaughlin.tps.entities;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;

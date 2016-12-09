@@ -5,6 +5,13 @@
 </head>
 <body>
 <section layout:fragment="custom-content">
+	<br>
+	<div th:class="row">
+		<div th:class="col-xs-12">
+			<a th:href="@{/add/account}" class="btn btn-primary">Add New Details</a>
+		</div>
+	</div>
+	<br>
 	<table id="listTable" class="table table-hover">
 		<thead>
 		<tr>
@@ -13,6 +20,7 @@
 			<th>Website</th>
 			<th>Username</th>
 			<th>Password</th>
+			<th></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -26,6 +34,7 @@
 					   th:text="${account_details.username}" /></td>
 			<td><label type="text"
 					   th:text="${account_details.passwordHash}" /></td>
+			<td><a href="#" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 		</tr>
 		</tbody>
 	</table>
