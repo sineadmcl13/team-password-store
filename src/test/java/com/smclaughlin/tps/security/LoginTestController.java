@@ -83,7 +83,7 @@ public class LoginTestController extends IntegrationTest {
 
         mockMvc.perform(get("/logout"))
                 .andExpect(unauthenticated())
-                .andExpect(redirectedUrl(ABSOLUTE_PATH+"login"));
+                .andExpect(redirectedUrl("/login?logout"));
 
     }
 

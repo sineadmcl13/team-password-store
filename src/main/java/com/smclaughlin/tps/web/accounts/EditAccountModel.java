@@ -8,10 +8,10 @@ import java.io.Serializable;
 /**
  * Created by sineadmclaughlin on 27/11/2016.
  */
-public class AddAccountsModel extends AbstractModel implements Serializable{
+public class EditAccountModel extends AbstractModel implements Serializable{
 
 
-    public final static String KEY = "addAccountsModel";
+    public final static String KEY = "editAccountsModel";
     private static final long serialVersionUID = 8065753207492818684L;
 
     private AccountDetails accountDetails;

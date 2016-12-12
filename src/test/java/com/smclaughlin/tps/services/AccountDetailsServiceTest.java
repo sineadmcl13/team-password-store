@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+
 /**
  * Created by sineadmclaughlin on 29/11/2016.
  */
@@ -20,14 +21,23 @@ public class AccountDetailsServiceTest extends IntegrationTest{
     @Autowired
     IAccountDetailsService accountDetailsService;
 
-    @Test
-    @DatabaseSetup("/test_db/services/accountDetailsService/beforeTestGetAccountDetailsById.xml")
-    @DatabaseTearDown
-    public void testGetAccountDetailsById() throws Exception{
 
-        AccountDetails accountDetails = new AccountDetails(1L, "testAccount", "google.com", "admin@test.com", "password", "password");
-        AccountDetails serviceResult = accountDetailsService.getAccountDetailsById(1L);
-        assertThat(serviceResult, equalTo(accountDetails));
+    @Test
+    @DatabaseSetup("/test_db/services/accountDetailsService/beforeTestGetAccountDetailsByUUID.xml")
+    @DatabaseTearDown
+    public void testGetAccountDetailsByUUID() throws Exception{
+
+        AccountDetails ac = createTestAccountDetail();
+        ac.setId(1L);
+        ac.setAccountName("facebook");
+        ac.setAccountWebsite("facebook.com");
+        ac.setUsername("admin@test.com");
+        ac.setPasswordHash("password");
+        ac.setPasswordSalt("password");
+        ac.setUuid("38a5639e-d041-4793-bfce-bccf81016e38");
+
+        AccountDetails serviceResult = accountDetailsService.getAccountDetailsByUUID("38a5639e-d041-4793-bfce-bccf81016e38");
+        assertThat(serviceResult, equalTo(ac));
 
     }
 
@@ -37,7 +47,8 @@ public class AccountDetailsServiceTest extends IntegrationTest{
     @DatabaseTearDown
     public void testSaveAccountDetails() throws Exception{
 
-        AccountDetails accountDetails = new AccountDetails(1L, "testAccount", "google.com", "admin@test.com", "password2", "password");
+        AccountDetails accountDetails = accountDetailsService.getAccountDetailsByUUID("38a5639e-d041-4793-bfce-bccf81016e38");
+        accountDetails.setPasswordHash("password1");
 
         AccountDetails serviceResult = accountDetailsService.saveAccountDetails(accountDetails);
         assertThat(serviceResult, equalTo(accountDetails));
@@ -50,13 +61,7 @@ public class AccountDetailsServiceTest extends IntegrationTest{
     @DatabaseTearDown
     public void testCreateNewAccountDetails() throws Exception{
 
-        AccountDetails accountDetails = new AccountDetails();
-        accountDetails.setAccountName("testAccount");
-        accountDetails.setAccountWebsite("test.com");
-        accountDetails.setUsername("testUser");
-        accountDetails.setPasswordSalt("passwordSalt");
-        accountDetails.setPasswordHash("passwordHash");
-
+        AccountDetails accountDetails = createTestAccountDetail();
         accountDetailsService.createNewAccountDetails(accountDetails);
     }
 

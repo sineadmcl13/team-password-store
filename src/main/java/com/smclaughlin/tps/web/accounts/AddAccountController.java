@@ -17,8 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * Created by sineadmclaughlin on 20/11/2016.
  */
 @Controller
-@SessionAttributes(AddAccountsModel.KEY)
-public class AddAccountsController {
+@SessionAttributes(AddAccountModel.KEY)
+public class AddAccountController {
 
     private static String ADD_ACCOUNT = "accounts/addAccount";
     private static String REDIRECT_DASHBOARD = "redirect:/home";
@@ -28,22 +28,21 @@ public class AddAccountsController {
 
     @ModelAttribute
     public void formBacking(ModelMap model) {
-        AddAccountsModel instanceModel = new AddAccountsModel();
+        AddAccountModel instanceModel = new AddAccountModel();
         instanceModel.retrieveOrCreate(model);
     }
 
     @RequestMapping(value = "/add/account", method = RequestMethod.GET)
-    public String getAddAccount(@ModelAttribute(AddAccountsModel.KEY) AddAccountsModel model) {
+    public String getAddAccount(@ModelAttribute(AddAccountModel.KEY) AddAccountModel model) {
         model.reset();
         model.setAccountDetails(new AccountDetails());
         return ADD_ACCOUNT;
     }
 
     @RequestMapping(value = "/add/account", method = RequestMethod.POST)
-    public String postAddAccount(@ModelAttribute(AddAccountsModel.KEY) AddAccountsModel model,
+    public String postAddAccount(@ModelAttribute(AddAccountModel.KEY) AddAccountModel model,
                                  final RedirectAttributes redirectAttributes) {
 
-        //Save new Account Detail
         accountDetailsService.createNewAccountDetails(model.getAccountDetails());
         redirectAttributes.addFlashAttribute(FLASH_MESSAGE.name(), "success");
         return REDIRECT_DASHBOARD;

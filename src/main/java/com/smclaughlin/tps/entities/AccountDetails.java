@@ -1,9 +1,6 @@
 package com.smclaughlin.tps.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -11,11 +8,8 @@ import java.util.Objects;
  */
 
 @Entity(name = "Account_Details")
-public class AccountDetails {
+public class AccountDetails extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String accountName;
     private String accountWebsite;
     private String username;
@@ -23,25 +17,13 @@ public class AccountDetails {
     private String passwordHash;
 
     public AccountDetails() {
+        this.accountName = "";
+        this.accountWebsite = "";
+        this.username = "";
+        this.passwordSalt = "";
+        this.passwordHash = "";
     }
 
-    public AccountDetails(Long id, String accountName, String accountWebsite,
-                          String username, String passwordSalt, String passwordHash) {
-        this.id = id;
-        this.accountName = accountName;
-        this.accountWebsite = accountWebsite;
-        this.username = username;
-        this.passwordSalt = passwordSalt;
-        this.passwordHash = passwordHash;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getAccountName() {
         return accountName;
@@ -83,6 +65,7 @@ public class AccountDetails {
         this.passwordHash = passwordHash;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,12 +77,14 @@ public class AccountDetails {
                 Objects.equals(accountWebsite, that.accountWebsite) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(passwordSalt, that.passwordSalt) &&
-                Objects.equals(passwordHash, that.passwordHash);
+                Objects.equals(passwordHash, that.passwordHash) &&
+                Objects.equals(uuid, that.uuid);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountName, accountWebsite, username, passwordSalt, passwordHash);
+        return Objects.hash(id, accountName, accountWebsite, username, passwordSalt, passwordHash, uuid);
     }
 
 }

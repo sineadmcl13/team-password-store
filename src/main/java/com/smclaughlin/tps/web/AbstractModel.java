@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
  */
 public abstract class AbstractModel {
 
+
     public abstract void reset();
 
     public abstract String getKey();

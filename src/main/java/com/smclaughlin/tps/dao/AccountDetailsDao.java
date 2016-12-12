@@ -20,10 +20,10 @@ public class AccountDetailsDao implements IAccountDetailsDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public AccountDetails getAccountDetailsById(Long id) {
-        String selectQuery = "SELECT * FROM Account_Details WHERE id = ?";
+    public AccountDetails getAccountDetailsByUUID(String uuid) {
+        String selectQuery = "SELECT * FROM Account_Details WHERE uuid = ?";
         AccountDetails accountDetails =
-                jdbcTemplate.queryForObject(selectQuery, BeanPropertyRowMapper.newInstance(AccountDetails.class), id);
+                jdbcTemplate.queryForObject(selectQuery, BeanPropertyRowMapper.newInstance(AccountDetails.class), uuid);
 
         return accountDetails;
     }
@@ -31,7 +31,7 @@ public class AccountDetailsDao implements IAccountDetailsDao {
     @Override
     public AccountDetails createNewAccountDetails(AccountDetails ad) {
         String insertQuery = "INSERT INTO Account_Details (account_name, account_website, " +
-                "username, password_salt, password_hash) VALUES(?, ?, ?, ?, ?)";
+                "username, password_salt, password_hash, uuid) VALUES(?, ?, ?, ?, ?, ?)";
 
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
@@ -41,6 +41,7 @@ public class AccountDetailsDao implements IAccountDetailsDao {
             statement.setString(3, ad.getUsername());
             statement.setString(4, ad.getPasswordSalt());
             statement.setString(5, ad.getPasswordHash());
+            statement.setString(6, ad.getUuid().toString());
             return statement;
         }, holder);
 
@@ -55,7 +56,8 @@ public class AccountDetailsDao implements IAccountDetailsDao {
 
         jdbcTemplate.update(updateQuery, ad.getAccountName(),ad.getAccountWebsite(),
                 ad.getUsername(), ad.getPasswordSalt(), ad.getPasswordHash(), ad.getId());
-        return ad;
 
+        return ad;
     }
+
 }

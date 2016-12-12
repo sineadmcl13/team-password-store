@@ -9,10 +9,10 @@ public interface IAccountDetailsDao {
 
     /**
      * Return accountDetails object that matches the id passed in as parameter
-     * @param id - the id of the account details object to be returned
+     * @param uuid - the uuid of the account details object to be returned
      * @return @see AccountDetails.class
      */
-    AccountDetails getAccountDetailsById(Long id);
+    AccountDetails getAccountDetailsByUUID(String uuid);
 
     /**
      * Persists a new AccountDetails object to storage

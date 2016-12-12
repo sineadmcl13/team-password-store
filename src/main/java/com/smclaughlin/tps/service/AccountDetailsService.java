@@ -15,8 +15,8 @@ public class AccountDetailsService implements IAccountDetailsService {
     IAccountDetailsDao accountDetailsDao;
 
     @Override
-    public AccountDetails getAccountDetailsById(Long id) {
-        return accountDetailsDao.getAccountDetailsById(id);
+    public AccountDetails getAccountDetailsByUUID(String uuid) {
+        return accountDetailsDao.getAccountDetailsByUUID(uuid);
     }
 
     @Override
