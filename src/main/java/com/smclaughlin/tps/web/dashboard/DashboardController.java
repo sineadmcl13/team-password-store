@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes(DashboardModel.KEY)
 public class DashboardController {
 
-    private static String DASHBOARD = "home/dashboard";
+    private static String DASHBOARD = "dashboard/dashboard";
+    private static String REDIRECT_DASHBOARD = "redirect:/dashboard";
 
     @Autowired
     IAccountDetailsService accountDetailsService;
@@ -27,12 +28,12 @@ public class DashboardController {
         instanceModel.retrieveOrCreate(model);
     }
 
-    @RequestMapping("/home")
+
+    @RequestMapping("/dashboard")
     public String getDashboard(@ModelAttribute(DashboardModel.KEY) DashboardModel model) {
 
         model.reset();
         return DASHBOARD;
     }
-
 
 }

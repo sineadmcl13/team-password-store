@@ -47,7 +47,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-security")
 
     //Database connections
-//    compile("org.springframework:spring-jdbc")
     compile("org.springframework.boot:spring-boot-starter-jdbc:1.4.2.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("mysql:mysql-connector-java:6.0.5")
@@ -62,6 +61,7 @@ dependencies {
     compile("org.webjars:bootstrap:3.3.7-1")
     compile("org.webjars:font-awesome:4.7.0")
     compile("org.webjars:datatables:1.10.12-1")
+    compile("org.webjars:toastr:2.1.2")
 
     compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 

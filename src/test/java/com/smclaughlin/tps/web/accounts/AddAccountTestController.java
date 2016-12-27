@@ -2,7 +2,9 @@ package com.smclaughlin.tps.web.accounts;
 
 import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
-import static com.smclaughlin.tps.utils.SystemEnums.*;
+
+import static com.smclaughlin.tps.utils.FlashMessage.FLASH_MESSAGE;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -48,8 +50,8 @@ public class AddAccountTestController extends IntegrationTest{
 
         mockMvc.perform(post("/add/account").sessionAttr(AddAccountModel.KEY, model))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/home"))
-                .andExpect(flash().attribute(FLASH_MESSAGE.name(), "success"));
+                .andExpect(view().name("redirect:/dashboard"))
+                .andExpect(flash().attributeExists(FLASH_MESSAGE));
     }
 
 

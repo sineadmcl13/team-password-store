@@ -5,7 +5,6 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
 import org.junit.Test;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,8 @@ public class DashboardTestController extends IntegrationTest {
 
     @Test
     public void testDashboardView() throws Exception{
-        mockMvc.perform(get("/home"))
-                .andExpect(view().name("home/dashboard"));
+        mockMvc.perform(get("/dashboard"))
+                .andExpect(view().name("dashboard/dashboard"));
     }
 
 
@@ -32,7 +31,7 @@ public class DashboardTestController extends IntegrationTest {
     public void testDashboardModelReset() throws Exception{
 
         DashboardModel modelResult =
-                (DashboardModel) mockMvc.perform(get("/home"))
+                (DashboardModel) mockMvc.perform(get("/dashboard"))
                         .andReturn().getModelAndView().getModelMap().get(DashboardModel.KEY);
 
         List<AccountDetails> accountDetailsList = modelResult.getAccountDetailsList();
