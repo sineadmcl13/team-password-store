@@ -2,6 +2,8 @@ package com.smclaughlin.tps.dao;
 
 import com.smclaughlin.tps.entities.AccountDetails;
 
+import java.util.List;
+
 /**
  * Created by sineadmclaughlin on 25/11/2016.
  */
@@ -13,6 +15,14 @@ public interface IAccountDetailsDao {
      * @return @see AccountDetails.class
      */
     AccountDetails getAccountDetailsByUUID(String uuid);
+
+
+    /**
+     * Returns a list of Account Details objects
+     * @return List of Account Details objects
+     */
+    List<AccountDetails> getListOfAccountDetails();
+
 
     /**
      * Persists a new AccountDetails object to storage

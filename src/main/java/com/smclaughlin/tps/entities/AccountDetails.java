@@ -15,7 +15,6 @@ public class AccountDetails extends AbstractEntity{
     private String accountWebsite;
     private String username;
     private String passwordSalt;
-    @Column(columnDefinition="text")
     private String passwordHash;
 
     public AccountDetails() {

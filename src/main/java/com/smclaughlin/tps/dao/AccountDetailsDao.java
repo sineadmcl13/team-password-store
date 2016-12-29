@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  * Created by sineadmclaughlin on 25/11/2016.
@@ -24,6 +25,15 @@ public class AccountDetailsDao implements IAccountDetailsDao {
         String selectQuery = "SELECT * FROM Account_Details WHERE uuid = ?";
         AccountDetails accountDetails =
                 jdbcTemplate.queryForObject(selectQuery, BeanPropertyRowMapper.newInstance(AccountDetails.class), uuid);
+
+        return accountDetails;
+    }
+
+    @Override
+    public List<AccountDetails> getListOfAccountDetails() {
+        String selectQuery = "SELECT * FROM Account_Details";
+        List<AccountDetails> accountDetails =
+                jdbcTemplate.query(selectQuery, BeanPropertyRowMapper.newInstance(AccountDetails.class));
 
         return accountDetails;
     }

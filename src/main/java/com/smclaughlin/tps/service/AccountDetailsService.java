@@ -6,6 +6,8 @@ import com.smclaughlin.tps.service.security.IPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by sineadmclaughlin on 25/11/2016.
  */
@@ -24,6 +26,11 @@ public class AccountDetailsService implements IAccountDetailsService {
     }
 
     @Override
+    public List<AccountDetails> returnListOfAccountDetails() {
+        return accountDetailsDao.getListOfAccountDetails();
+    }
+
+    @Override
     public AccountDetails saveAccountDetails(AccountDetails accountDetails) {
         securePasswordDetails(accountDetails);
         return accountDetailsDao.saveAccountDetails(accountDetails);
@@ -37,7 +44,7 @@ public class AccountDetailsService implements IAccountDetailsService {
 
 
     private AccountDetails securePasswordDetails(AccountDetails ad){
-        String salt = new String(passwordService.generatePasswordSalt());
+        String salt = passwordService.generatePasswordSalt();
         String hash = passwordService.generateHash(salt, ad.getPasswordHash());
         ad.setPasswordSalt(salt);
         ad.setPasswordHash(hash);

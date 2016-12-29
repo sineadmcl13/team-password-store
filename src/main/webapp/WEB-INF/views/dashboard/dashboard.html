@@ -24,24 +24,44 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:each="mItem : ${account_details}">
+		<tr th:each="mItem : ${dashboardModel.accountDetailsList}">
 			<td><input type="checkbox" /></td>
 			<td><label type="text"
-					   th:text="${account_details.accountName}" /></td>
-			<td><a th:href="${account_details.accountWebsite}"
-					   th:text="${account_details.accountWebsite}" /></td>
+					   th:text="${mItem.accountName}" /></td>
+			<td><a th:href="${mItem.accountWebsite}"
+					   th:text="${mItem.accountWebsite}" /></td>
 			<td><label type="text"
-					   th:text="${account_details.username}" /></td>
-			<td><label type="text"
-					   th:text="${account_details.passwordHash}" /></td>
-			<td><a href="#" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+					   th:text="${mItem.username}" /></td>
+			<td><label type="text" ><a class="passwd" th:attr="data-uuid=${mItem.uuid}" href="#">##########</a></label></td>
+			<td>
+				<!--<a href="#" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>-->
+			</td>
 		</tr>
 		</tbody>
 	</table>
 	<script type="application/javascript">
 		$(document).ready(function(){
 			$('#listTable').DataTable();
+
+			$('.passwd').click(function(){
+			    var row = $(this);
+                $.ajax({
+                    url: "/account/password/"+row.data("uuid")
+                }).done(function( passwd ) {
+                    row.text(passwd);
+                    setTimeout(function(){
+                        hidePassword(row);
+                    }, 10000);
+                });
+			});
+
 		});
+
+		function hidePassword(row){
+		    row.text("##########");
+		}
+
+
 	</script>
 </section>
 </body>

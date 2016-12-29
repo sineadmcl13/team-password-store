@@ -6,10 +6,10 @@ import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -35,7 +35,6 @@ public class DashboardTestController extends IntegrationTest {
                         .andReturn().getModelAndView().getModelMap().get(DashboardModel.KEY);
 
         List<AccountDetails> accountDetailsList = modelResult.getAccountDetailsList();
-        assertEquals(accountDetailsList, new ArrayList<AccountDetails>());
-
+        assertThat(accountDetailsList, contains(createTestAccountDetail()));
     }
 }

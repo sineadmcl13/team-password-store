@@ -67,6 +67,7 @@ dependencies {
 
     //security dependencies
     compile("com.lambdaworks:scrypt:1.4.0")
+    compile("org.bouncycastle:bcprov-jdk15on:1.56")
 
     testCompile("junit:junit")
     testCompile("org.dbunit:dbunit:2.5.3")

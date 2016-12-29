@@ -2,6 +2,8 @@ package com.smclaughlin.tps.service;
 
 import com.smclaughlin.tps.entities.AccountDetails;
 
+import java.util.List;
+
 /**
  * Created by sineadmclaughlin on 25/11/2016.
  */
@@ -13,6 +15,13 @@ public interface IAccountDetailsService {
      * @return @see AccountDetails.class
      */
     AccountDetails getAccountDetailsByUUID(String uuid);
+
+
+    /**
+     * Return list of all account detail objects
+     * @return List of AccountDetails.class
+     */
+    List<AccountDetails> returnListOfAccountDetails();
 
     /**
      * Persists a new AccountDetails object to storage
