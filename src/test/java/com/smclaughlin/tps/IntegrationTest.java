@@ -2,6 +2,8 @@ package com.smclaughlin.tps;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.smclaughlin.tps.entities.AccountDetails;
+import com.smclaughlin.tps.utils.HashGenerator;
+import com.smclaughlin.tps.utils.SaltGenerator;
 import com.smclaughlin.tps.utils.UUIDGenerator;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -25,6 +27,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
+import static org.mockito.Matchers.any;
+
 /**
  * Created by sineadmclaughlin on 22/11/2016.
  */
@@ -38,7 +42,7 @@ import java.util.UUID;
         WithSecurityContextTestExecutionListener.class})
 @PowerMockRunnerDelegate(SpringRunner.class)
 @PowerMockIgnore({"javax.management.*"})
-@PrepareForTest(UUIDGenerator.class)
+@PrepareForTest({UUIDGenerator.class, SaltGenerator.class, HashGenerator.class})
 public abstract class IntegrationTest {
 
     @Autowired
@@ -56,7 +60,15 @@ public abstract class IntegrationTest {
     @Before
     public void setUpMocks(){
         PowerMockito.mockStatic(UUIDGenerator.class);
+        PowerMockito.mockStatic(SaltGenerator.class);
+        PowerMockito.mockStatic(HashGenerator.class);
+
+        byte[] mockSalt = "1abc49dF5".getBytes();
+        System.out.println(new String(mockSalt));
+
         PowerMockito.when(UUIDGenerator.randomUUID()).thenReturn(UUID.fromString("38a5639e-d041-4793-bfce-bccf81016e38"));
+        PowerMockito.when(SaltGenerator.generateSalt()).thenReturn(mockSalt);
+        PowerMockito.when(HashGenerator.generateHash(any(String.class))).thenReturn("3Y6QyLpob7LeZtwoxkhQzOP");
 
     }
 
@@ -67,8 +79,7 @@ public abstract class IntegrationTest {
         ac.setAccountWebsite("facebook.com");
         ac.setUsername("admin@test.com");
         ac.setPasswordHash("password");
-        ac.setPasswordSalt("password");
-
+        ac.setPasswordSalt("1abc49dF5");
         return ac;
     }
 }

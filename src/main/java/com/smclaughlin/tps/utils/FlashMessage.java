@@ -15,6 +15,8 @@ public class FlashMessage {
     private MessageType type;
     private String message;
 
+    FlashMessage() {}
+
     public FlashMessage(MessageType type, String message) {
         this.type = type;
         this.message = message;

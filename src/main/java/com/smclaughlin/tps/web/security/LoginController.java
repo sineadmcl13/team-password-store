@@ -1,4 +1,4 @@
-package com.smclaughlin.tps.security;
+package com.smclaughlin.tps.web.security;
 
 import com.smclaughlin.tps.utils.FlashMessage;
 import org.springframework.security.core.Authentication;

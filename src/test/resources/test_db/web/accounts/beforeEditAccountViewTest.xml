@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <Account_Details id="1" account_name="facebook" account_website="facebook.com" username="admin@test.com" password_salt="password" password_hash="password" uuid="38a5639e-d041-4793-bfce-bccf81016e38"/>
+    <Account_Details id="1" account_name="facebook" account_website="facebook.com" username="admin@test.com" password_salt="1abc49dF5" password_hash="password" uuid="38a5639e-d041-4793-bfce-bccf81016e38"/>
 </dataset>

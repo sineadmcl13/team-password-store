@@ -1,5 +1,6 @@
 package com.smclaughlin.tps.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class AccountDetails extends AbstractEntity{
     private String accountWebsite;
     private String username;
     private String passwordSalt;
+    @Column(columnDefinition="text")
     private String passwordHash;
 
     public AccountDetails() {

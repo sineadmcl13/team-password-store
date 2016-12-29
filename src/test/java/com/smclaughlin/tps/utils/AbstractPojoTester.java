@@ -1,7 +1,8 @@
-package com.smclaughlin.tps.entities;
+package com.smclaughlin.tps.utils;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.Before;
 import org.junit.Test;
 import org.meanbean.lang.Factory;
 import org.meanbean.test.BeanTester;
@@ -19,6 +20,13 @@ public abstract class AbstractPojoTester<T> {
 
     protected abstract T getPojoInstance();
 
+    protected boolean checkEquals;
+
+    @Before
+    public void setCheckEquals() {
+        this.checkEquals = true;
+    }
+
     class LocalDateTimeFactory implements Factory {
         @Override
         public LocalDateTime create() {
@@ -28,7 +36,9 @@ public abstract class AbstractPojoTester<T> {
 
     @Test
     public void equalsAndHashCodeContract() {
-        EqualsVerifier.forClass(getPojoInstance().getClass()).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+        if(checkEquals){
+            EqualsVerifier.forClass(getPojoInstance().getClass()).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
+        }
     }
 
     @Test
@@ -49,4 +59,5 @@ public abstract class AbstractPojoTester<T> {
             assertEquals(myBean, deserializedMyBean);
         }
     }
+
 }
