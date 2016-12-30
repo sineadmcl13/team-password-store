@@ -2,9 +2,10 @@ package com.smclaughlin.tps.web.accounts;
 
 import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
-import static com.smclaughlin.tps.utils.SystemEnums.*;
+
+import static com.smclaughlin.tps.utils.FlashMessage.FLASH_MESSAGE;
+
 import org.junit.Test;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by sineadmclaughlin on 27/11/2016.
  */
-public class AddAccountsTestController extends IntegrationTest{
+public class AddAccountTestController extends IntegrationTest{
 
     @Test
     public void testAddAccountView() throws Exception{
@@ -26,10 +27,10 @@ public class AddAccountsTestController extends IntegrationTest{
     }
 
     @Test
-    public void testAddAccountModel() throws Exception{
-        AddAccountsModel modelResult =
-                (AddAccountsModel) mockMvc.perform(get("/add/account"))
-                        .andReturn().getModelAndView().getModelMap().get(AddAccountsModel.KEY);
+    public void testAddAccountModelReset() throws Exception{
+        AddAccountModel modelResult =
+                (AddAccountModel) mockMvc.perform(get("/add/account"))
+                        .andReturn().getModelAndView().getModelMap().get(AddAccountModel.KEY);
 
         AccountDetails accountDetails = modelResult.getAccountDetails();
         assertEquals(accountDetails, new AccountDetails());
@@ -38,21 +39,21 @@ public class AddAccountsTestController extends IntegrationTest{
 
     @Test
     public void checkAccountModelKeyIsNotNull() throws Exception{
-        assertNotNull(new AddAccountsModel().getKey());
+        assertNotNull(new AddAccountModel().getKey());
     }
 
     @Test
     public void testAddAccountPost() throws Exception{
 
-        AccountDetails accountDetails = new AccountDetails(1L, "testAccount", "google.com", "admin@test.com", "password", "password");
+        AddAccountModel model = new AddAccountModel();
+        model.setAccountDetails(createTestAccountDetail());
 
-        AddAccountsModel model = new AddAccountsModel();
-        model.setAccountDetails(accountDetails);
-
-        mockMvc.perform(post("/add/account").sessionAttr(AddAccountsModel.KEY, model))
+        mockMvc.perform(post("/add/account").sessionAttr(AddAccountModel.KEY, model))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/home"))
-                .andExpect(flash().attribute(FLASH_MESSAGE.name(), "success"));
+                .andExpect(view().name("redirect:/dashboard"))
+                .andExpect(flash().attributeExists(FLASH_MESSAGE));
     }
+
+
 
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{templates/masterTemplate}" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<section layout:fragment="custom-content">
+	<br>
+	<div th:class="row">
+		<div th:class="col-xs-12">
+			<a th:href="@{/add/account}" class="btn btn-primary">Add New Details </a>
+		</div>
+	</div>
+	<br>
+	<table id="listTable" class="table table-hover">
+		<thead>
+		<tr>
+			<th><input type="checkbox" /></th>
+			<th>Account</th>
+			<th>Website</th>
+			<th>Username</th>
+			<th>Password</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="mItem : ${dashboardModel.accountDetailsList}">
+			<td><input type="checkbox" /></td>
+			<td><label type="text"
+					   th:text="${mItem.accountName}" /></td>
+			<td><a th:href="${mItem.accountWebsite}"
+					   th:text="${mItem.accountWebsite}" /></td>
+			<td><label type="text"
+					   th:text="${mItem.username}" /></td>
+			<td><label type="text" ><a class="passwd" th:attr="data-uuid=${mItem.uuid}" href="#">##########</a></label></td>
+			<td>
+				<!--<a href="#" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>-->
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<script type="application/javascript">
+		$(document).ready(function(){
+			$('#listTable').DataTable();
+
+			$('.passwd').click(function(){
+			    var row = $(this);
+                $.ajax({
+                    url: "/account/password/"+row.data("uuid")
+                }).done(function( passwd ) {
+                    row.text(passwd);
+                    setTimeout(function(){
+                        hidePassword(row);
+                    }, 10000);
+                });
+			});
+
+		});
+
+		function hidePassword(row){
+		    row.text("##########");
+		}
+
+
+	</script>
+</section>
+</body>
+</html>

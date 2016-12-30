@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{templates/masterTemplate}" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<section layout:fragment="custom-content">
+
+    <p>Edit Account Details</p>
+
+    <form action="#" th:action="@{#}" th:object="${editAccountsModel}" th:class="form-horizontal" method="post">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Account Name</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="account" th:field="*{accountDetails.accountName}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Account Login Page</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="account" th:field="*{accountDetails.accountWebsite}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="account" th:field="*{accountDetails.username}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="account" th:field="*{accountDetails.passwordHash}" />
+            </div>
+        </div>
+        <button type="submit" th:class="btn">Submit</button>
+    </form>
+
+</section>
+</body>
+</html>

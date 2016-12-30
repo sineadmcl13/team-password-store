@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,19 +6,15 @@
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}" rel="stylesheet" />
     <link th:href="@{/webjars/datatables/1.10.12/css/jquery.dataTables.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/toastr/2.1.2/build/toastr.css}" rel="stylesheet" />
     <link th:href="@{/resources/css/main.css}" rel="stylesheet" />
 
     <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/datatables/1.10.12/js/jquery.dataTables.js}"></script>
+    <script th:src="@{/webjars/toastr/2.1.2/build/toastr.min.js}"></script>
+    <script th:src="@{/resources/js/notifications.js}"></script>
 
-    <script type="application/javascript">
-        $(document).ready(function() {
-            $('[data-toggle=offcanvas]').click(function() {
-                $('.row-offcanvas').toggleClass('active');
-            });
-        });
-    </script>
 </head>
 <body>
 <header>
@@ -54,7 +51,6 @@
                 <li class="active"><a href="#">Section</a></li>
                 <li><a href="#">Group 1</a></li>
                 <li><a href="#">Group 2</a></li>
-                <li><a href="#">Group 3</a></li>
             </ul>
         </div>
     </div>
@@ -72,5 +68,21 @@
         </footer>
     </div>
 </div><!--/row-offcanvas -->
+
+<script type="application/javascript">
+    $(document).ready(function() {
+        $('[data-toggle=offcanvas]').click(function() {
+            $('.row-offcanvas').toggleClass('active');
+        });
+    });
+</script>
+<script th:inline="javascript" th:if="${flashMessage != null}">
+    /*<![CDATA[*/
+        var message = /*[[#{${flashMessage.message}}]]*/;
+        var type = /*[[${flashMessage.type}]]*/;
+        showNotification(type, message);
+    /*]]>*/
+</script>
+
 </body>
 </html>

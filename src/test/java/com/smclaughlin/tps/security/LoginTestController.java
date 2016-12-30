@@ -31,7 +31,7 @@ public class LoginTestController extends IntegrationTest {
 
     @Test
     public void redirectToLoginWhenNotAuthenticated() throws Exception{
-        mockMvc.perform(get("/home"))
+        mockMvc.perform(get("/dashboard"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(unauthenticated())
                 .andExpect(redirectedUrl(ABSOLUTE_PATH+"login"));
@@ -72,8 +72,8 @@ public class LoginTestController extends IntegrationTest {
     public void testOnRootRequest() throws Exception{
 
         mockMvc.perform(get("/"))
-                .andExpect(redirectedUrl("/home"))
-                .andExpect(view().name("redirect:/home"));
+                .andExpect(redirectedUrl("/dashboard"))
+                .andExpect(view().name("redirect:/dashboard"));
 
     }
 
@@ -83,7 +83,7 @@ public class LoginTestController extends IntegrationTest {
 
         mockMvc.perform(get("/logout"))
                 .andExpect(unauthenticated())
-                .andExpect(redirectedUrl(ABSOLUTE_PATH+"login"));
+                .andExpect(redirectedUrl("/login?logout"));
 
     }
 
