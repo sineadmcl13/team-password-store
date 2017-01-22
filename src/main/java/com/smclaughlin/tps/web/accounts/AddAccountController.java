@@ -49,7 +49,7 @@ public class AddAccountController {
                                  RedirectAttributes redirectAttributes) {
 
         accountDetailsService.createNewAccountDetails(model.getAccountDetails());
-        redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.account.add.success"));
+        redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.add.account.success"));
         return REDIRECT_DASHBOARD;
     }
 

@@ -44,7 +44,7 @@ public class EditAccountController {
                                  final RedirectAttributes redirectAttributes) {
 
         accountDetailsService.saveAccountDetails(model.getAccountDetails());
-        redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.account.edit.success"));
+        redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.edit.account.success"));
         return REDIRECT_DASHBOARD;
     }
 

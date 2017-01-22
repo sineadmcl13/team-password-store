@@ -2,6 +2,7 @@ package com.smclaughlin.tps;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.smclaughlin.tps.entities.AccountDetails;
+import com.smclaughlin.tps.entities.AccountGroup;
 import com.smclaughlin.tps.utils.CipherGenerator;
 import com.smclaughlin.tps.utils.SaltGenerator;
 import com.smclaughlin.tps.utils.UUIDGenerator;
@@ -81,4 +82,13 @@ public abstract class IntegrationTest {
         ac.setUuid("38a5639e-d041-4793-bfce-bccf81016e38");
         return ac;
     }
+
+    protected AccountGroup createTestAccountGroupDetails(){
+        AccountGroup accountGroup = new AccountGroup();
+        accountGroup.setId(1L);
+        accountGroup.setUuid("38a5639e-d041-4793-bfce-bccf81016e38");
+        accountGroup.setGroupName("TestGroupName");
+        return accountGroup;
+    }
+
 }
