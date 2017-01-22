@@ -2,6 +2,7 @@ package com.smclaughlin.tps.dao;
 
 import com.smclaughlin.tps.entities.AccountGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,16 @@ public class AccountGroupDao implements IAccountGroupDao {
 
 
     @Override
-    public AccountGroup createGroup(AccountGroup accountGroup) {
+    public AccountGroup getAccountGroupByUUID(String uuid) {
+        String selectQuery = "SELECT * FROM Account_Group WHERE uuid = ?";
+        AccountGroup accountGroup =
+                jdbcTemplate.queryForObject(selectQuery, BeanPropertyRowMapper.newInstance(AccountGroup.class), uuid);
+
+        return accountGroup;
+    }
+
+    @Override
+    public AccountGroup createAccountGroup(AccountGroup accountGroup) {
         String insertQuery = "INSERT INTO Account_Group (uuid, group_name) VALUES(?, ?)";
 
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
@@ -35,4 +45,12 @@ public class AccountGroupDao implements IAccountGroupDao {
         return accountGroup;
     }
 
+    @Override
+    public AccountGroup saveAccountGroup(AccountGroup accountGroup) {
+        String updateQuery = "UPDATE Account_Group set group_name=? WHERE id=?";
+
+        jdbcTemplate.update(updateQuery, accountGroup.getGroupName(), accountGroup.getId());
+
+        return accountGroup;
+    }
 }

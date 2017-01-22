@@ -14,8 +14,19 @@ public class AccountAccountGroupService implements IAccountGroupService {
     @Autowired
     IAccountGroupDao groupDao;
 
+
+    @Override
+    public AccountGroup getAccountDetailsByUUID(String uuid) {
+        return groupDao.getAccountGroupByUUID(uuid);
+    }
+
     @Override
     public AccountGroup createNewAccountGroup(AccountGroup accountGroup) {
-        return groupDao.createGroup(accountGroup);
+        return groupDao.createAccountGroup(accountGroup);
+    }
+
+    @Override
+    public AccountGroup saveAccountGroup(AccountGroup accountGroup) {
+        return groupDao.saveAccountGroup(accountGroup);
     }
 }

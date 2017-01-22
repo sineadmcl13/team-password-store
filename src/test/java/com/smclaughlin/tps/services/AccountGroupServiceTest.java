@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.equalTo;
 
 
 /**
@@ -34,4 +34,17 @@ public class AccountGroupServiceTest extends IntegrationTest{
     }
 
 
+    @Test
+    @DatabaseSetup("/test_db/services/accountGroupService/beforeTestSaveAccountGroup.xml")
+    @ExpectedDatabase(assertionMode= DatabaseAssertionMode.NON_STRICT, value="/test_db/services/accountGroupService/afterTestSaveAccountGroup.xml")
+    @DatabaseTearDown
+    public void testSaveAccountGroup() throws Exception{
+
+        AccountGroup accountGroup = accountGroupService.getAccountDetailsByUUID("38a5639e-d041-4793-bfce-bccf81016e49");
+        accountGroup.setGroupName("TestGroup2");
+
+        AccountGroup serviceResult = accountGroupService.saveAccountGroup(accountGroup);
+        assertThat(serviceResult, equalTo(accountGroup));
+
+    }
 }
