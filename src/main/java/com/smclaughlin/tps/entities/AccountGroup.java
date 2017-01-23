@@ -1,6 +1,8 @@
 package com.smclaughlin.tps.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -10,6 +12,9 @@ import java.util.Objects;
 public class AccountGroup extends AbstractEntity {
 
     private String groupName;
+
+    @OneToMany(mappedBy="accountGroup")
+    private List<AccountDetails> accountDetailsList;
 
     public AccountGroup() {
         this.groupName = "";

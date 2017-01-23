@@ -1,6 +1,6 @@
 package com.smclaughlin.tps.entities;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -15,6 +15,10 @@ public class AccountDetails extends AbstractEntity {
     private String username;
     private String passwordSalt;
     private String passwordHash;
+
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="group_id")
+    private AccountGroup accountGroup;
 
     public AccountDetails() {
         this.accountName = "";
