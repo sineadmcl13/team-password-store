@@ -1,7 +1,7 @@
 package com.smclaughlin.tps.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -9,13 +9,17 @@ import java.util.Objects;
  */
 
 @Entity(name = "Account_Details")
-public class AccountDetails extends AbstractEntity{
+public class AccountDetails extends AbstractEntity {
 
     private String accountName;
     private String accountWebsite;
     private String username;
     private String passwordSalt;
     private String passwordHash;
+
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="group_id")
+    private AccountGroup accountGroup;
 
     public AccountDetails() {
         this.accountName = "";
@@ -66,6 +70,13 @@ public class AccountDetails extends AbstractEntity{
         this.passwordHash = passwordHash;
     }
 
+    public AccountGroup getAccountGroup() {
+        return accountGroup;
+    }
+
+    public void setAccountGroup(AccountGroup accountGroup) {
+        this.accountGroup = accountGroup;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -74,18 +85,13 @@ public class AccountDetails extends AbstractEntity{
         AccountDetails that = (AccountDetails) o;
 
         return Objects.equals(id, that.id) &&
-                Objects.equals(accountName, that.accountName) &&
-                Objects.equals(accountWebsite, that.accountWebsite) &&
-                Objects.equals(username, that.username) &&
-                Objects.equals(passwordSalt, that.passwordSalt) &&
-                Objects.equals(passwordHash, that.passwordHash) &&
                 Objects.equals(uuid, that.uuid);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountName, accountWebsite, username, passwordSalt, passwordHash, uuid);
+        return Objects.hash(id, uuid);
     }
 
 }

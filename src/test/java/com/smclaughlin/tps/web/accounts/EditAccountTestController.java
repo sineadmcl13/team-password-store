@@ -1,7 +1,6 @@
 package com.smclaughlin.tps.web.accounts;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
 import org.junit.Test;
@@ -20,7 +19,6 @@ public class EditAccountTestController extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/web/accounts/beforeEditAccountViewTest.xml")
-    @DatabaseTearDown
     public void testEditAccountView() throws Exception{
         mockMvc.perform(get("/edit/account/38a5639e-d041-4793-bfce-bccf81016e38"))
                 .andExpect(view().name("accounts/editAccount"));
@@ -28,7 +26,6 @@ public class EditAccountTestController extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/web/accounts/beforeEditAccountViewTest.xml")
-    @DatabaseTearDown
     public void testEditAccountModelReset() throws Exception{
         EditAccountModel modelResult =
                 (EditAccountModel) mockMvc.perform(get("/edit/account/38a5639e-d041-4793-bfce-bccf81016e38"))
@@ -46,7 +43,6 @@ public class EditAccountTestController extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/web/accounts/beforeEditAccountViewTest.xml")
-    @DatabaseTearDown
     public void testEditAccountPost() throws Exception{
 
         AccountDetails accountDetails = createTestAccountDetail();

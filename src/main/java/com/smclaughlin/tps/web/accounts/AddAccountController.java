@@ -48,8 +48,8 @@ public class AddAccountController {
     public String postAddAccount(@ModelAttribute(AddAccountModel.KEY) AddAccountModel model,
                                  RedirectAttributes redirectAttributes) {
 
-        accountDetailsService.createNewAccountDetails(model.getAccountDetails());
-        redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.account.add.success"));
+        accountDetailsService.saveAccountDetails(model.getAccountDetails());
+        redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.add.account.success"));
         return REDIRECT_DASHBOARD;
     }
 

@@ -1,8 +1,8 @@
 package com.smclaughlin.tps.services;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.smclaughlin.tps.IntegrationTest;
 import com.smclaughlin.tps.entities.AccountDetails;
 import com.smclaughlin.tps.service.IAccountDetailsService;
@@ -27,7 +27,6 @@ public class AccountDetailsServiceTest extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/services/accountDetailsService/beforeTestGetAccountDetailsByUUID.xml")
-    @DatabaseTearDown
     public void testGetAccountDetailsByUUID() throws Exception{
 
         AccountDetails ac = createTestAccountDetail();
@@ -46,7 +45,6 @@ public class AccountDetailsServiceTest extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/services/accountDetailsService/beforeTestGetListAccountDetails.xml")
-    @DatabaseTearDown
     public void testGetListAccountDetails() throws Exception{
 
         AccountDetails ac = createTestAccountDetail();
@@ -66,8 +64,7 @@ public class AccountDetailsServiceTest extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/services/accountDetailsService/beforeTestSaveAccountDetails.xml")
-    @ExpectedDatabase("/test_db/services/accountDetailsService/afterTestSaveAccountDetails.xml")
-    @DatabaseTearDown
+    @ExpectedDatabase(assertionMode= DatabaseAssertionMode.NON_STRICT, value="/test_db/services/accountDetailsService/afterTestSaveAccountDetails.xml")
     public void testSaveAccountDetails() throws Exception{
 
         AccountDetails accountDetails = accountDetailsService.getAccountDetailsByUUID("38a5639e-d041-4793-bfce-bccf81016e38");
@@ -80,12 +77,18 @@ public class AccountDetailsServiceTest extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/services/accountDetailsService/beforeTestCreateNewAccountDetails.xml")
-    @ExpectedDatabase("/test_db/services/accountDetailsService/afterTestCreateNewAccountDetails.xml")
-    @DatabaseTearDown
+    @ExpectedDatabase(assertionMode= DatabaseAssertionMode.NON_STRICT, value="/test_db/services/accountDetailsService/afterTestCreateNewAccountDetails.xml")
     public void testCreateNewAccountDetails() throws Exception{
 
-        AccountDetails accountDetails = createTestAccountDetail();
-        accountDetailsService.createNewAccountDetails(accountDetails);
+        AccountDetails ac = new AccountDetails();
+        ac.setId(2L);
+        ac.setAccountName("facebook");
+        ac.setAccountWebsite("facebook.com");
+        ac.setUsername("admin@test.com");
+        ac.setPasswordHash("password");
+        ac.setPasswordSalt("EFyw4yY7mgAkt599");
+        ac.setUuid("38a5639e-d041-4793-bfce-bccf81016e38");
+        accountDetailsService.saveAccountDetails(ac);
     }
 
 

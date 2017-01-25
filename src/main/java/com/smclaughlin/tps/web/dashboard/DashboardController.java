@@ -1,6 +1,5 @@
 package com.smclaughlin.tps.web.dashboard;
 
-import com.smclaughlin.tps.entities.AccountDetails;
 import com.smclaughlin.tps.service.IAccountDetailsService;
 import com.smclaughlin.tps.service.security.IPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;

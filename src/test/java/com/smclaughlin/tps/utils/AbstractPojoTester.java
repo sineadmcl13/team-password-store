@@ -1,7 +1,5 @@
 package com.smclaughlin.tps.utils;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
 import org.meanbean.lang.Factory;
@@ -34,12 +32,6 @@ public abstract class AbstractPojoTester<T> {
         }
     }
 
-    @Test
-    public void equalsAndHashCodeContract() {
-        if(checkEquals){
-            EqualsVerifier.forClass(getPojoInstance().getClass()).suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
-        }
-    }
 
     @Test
     public void getterAndSetterCorrectness() throws Exception {
