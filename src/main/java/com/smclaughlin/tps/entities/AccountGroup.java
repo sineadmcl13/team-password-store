@@ -18,6 +18,11 @@ public class AccountGroup extends AbstractEntity {
 
     public AccountGroup() {
         this.groupName = "";
+        this.accountDetailsList = null;
+    }
+
+    public AccountGroup(Long id) {
+        this.id = id;
     }
 
     public String getGroupName() {
@@ -28,6 +33,13 @@ public class AccountGroup extends AbstractEntity {
         this.groupName = groupName;
     }
 
+    public List<AccountDetails> getAccountDetailsList() {
+        return accountDetailsList;
+    }
+
+    public void setAccountDetailsList(List<AccountDetails> accountDetailsList) {
+        this.accountDetailsList = accountDetailsList;
+    }
 
     @Override
     public boolean equals(Object o) {

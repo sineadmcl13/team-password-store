@@ -1,11 +1,8 @@
 package com.smclaughlin.tps.web.accountGroups;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.smclaughlin.tps.IntegrationTest;
-import com.smclaughlin.tps.entities.AccountDetails;
 import com.smclaughlin.tps.entities.AccountGroup;
-import com.smclaughlin.tps.web.accounts.EditAccountModel;
 import org.junit.Test;
 
 import static com.smclaughlin.tps.utils.FlashMessage.FLASH_MESSAGE;
@@ -22,7 +19,6 @@ public class EditAccountGroupTestController extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/web/accountGroups/beforeEditAccountGroupTest.xml")
-    @DatabaseTearDown
     public void testEditAccountGroupView() throws Exception{
         mockMvc.perform(get("/edit/account-group/38a5639e-d041-4793-bfce-bccf81016e38"))
                 .andExpect(view().name("group/editGroup"));
@@ -30,7 +26,6 @@ public class EditAccountGroupTestController extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/web/accountGroups/beforeEditAccountGroupTest.xml")
-    @DatabaseTearDown
     public void testEditAccountGroupModelReset() throws Exception{
         EditAccountGroupModel modelResult =
                 (EditAccountGroupModel) mockMvc.perform(get("/edit/account-group/38a5639e-d041-4793-bfce-bccf81016e38"))
@@ -48,7 +43,6 @@ public class EditAccountGroupTestController extends IntegrationTest{
 
     @Test
     @DatabaseSetup("/test_db/web/accountGroups/beforeEditAccountGroupTest.xml")
-    @DatabaseTearDown
     public void testEditAccountGroupPost() throws Exception{
 
         AccountGroup accountGroup = createTestAccountGroupDetails();

@@ -1,6 +1,5 @@
 package com.smclaughlin.tps.service;
 
-import com.smclaughlin.tps.entities.AccountDetails;
 import com.smclaughlin.tps.entities.AccountGroup;
 
 /**
@@ -18,15 +17,7 @@ public interface IAccountGroupService {
 
 
     /**
-     * Persists a new AccountGroup object to storage
-     * @param accountGroup - the object of type AccountGroup to be saved
-     * @return the saved accountGroup
-     */
-    AccountGroup createNewAccountGroup(AccountGroup accountGroup);
-
-
-    /**
-     * Updates the passed AccountGroup in storage
+     * Persists the passed AccountGroup to the db
      * @param accountGroup - the object of type AccountGroup to be saved
      * @return the saved AccountGroup
      */

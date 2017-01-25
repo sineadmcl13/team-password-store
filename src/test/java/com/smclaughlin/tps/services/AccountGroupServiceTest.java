@@ -1,7 +1,6 @@
 package com.smclaughlin.tps.services;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.smclaughlin.tps.IntegrationTest;
@@ -26,18 +25,19 @@ public class AccountGroupServiceTest extends IntegrationTest{
     @Test
     @DatabaseSetup("/test_db/services/accountGroupService/beforeTestCreateNewAccountGroup.xml")
     @ExpectedDatabase(assertionMode= DatabaseAssertionMode.NON_STRICT, value="/test_db/services/accountGroupService/afterTestCreateNewAccountGroup.xml")
-    @DatabaseTearDown
     public void testCreateNewAccountDetails() throws Exception{
 
-        AccountGroup accountGroup = createTestAccountGroupDetails();
-        accountGroupService.createNewAccountGroup(accountGroup);
+        AccountGroup accountGroup = new AccountGroup();
+        accountGroup.setId(2L);
+        accountGroup.setUuid("38a5639e-d041-4793-bfce-bccf81016e38");
+        accountGroup.setGroupName("TestGroupName");
+        accountGroupService.saveAccountGroup(accountGroup);
     }
 
 
     @Test
     @DatabaseSetup("/test_db/services/accountGroupService/beforeTestSaveAccountGroup.xml")
     @ExpectedDatabase(assertionMode= DatabaseAssertionMode.NON_STRICT, value="/test_db/services/accountGroupService/afterTestSaveAccountGroup.xml")
-    @DatabaseTearDown
     public void testSaveAccountGroup() throws Exception{
 
         AccountGroup accountGroup = accountGroupService.getAccountDetailsByUUID("38a5639e-d041-4793-bfce-bccf81016e49");

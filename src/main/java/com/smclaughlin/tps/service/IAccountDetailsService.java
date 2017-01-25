@@ -23,15 +23,9 @@ public interface IAccountDetailsService {
      */
     List<AccountDetails> returnListOfAccountDetails();
 
-    /**
-     * Persists a new AccountDetails object to storage
-     * @param accountDetails - the object of type AccountDetails to be saved
-     * @return the saved AccountDetails
-     */
-    AccountDetails createNewAccountDetails(AccountDetails accountDetails);
 
     /**
-     * Updates the passed AccountDetails to storage
+     * Persists the passed AccountDetails to the db
      * @param accountDetails - the object of type AccountDetails to be saved
      * @return the saved AccountDetails
      */

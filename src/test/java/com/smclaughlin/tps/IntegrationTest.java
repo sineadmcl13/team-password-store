@@ -1,11 +1,18 @@
 package com.smclaughlin.tps;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.smclaughlin.tps.entities.AccountDetails;
 import com.smclaughlin.tps.entities.AccountGroup;
 import com.smclaughlin.tps.utils.CipherGenerator;
 import com.smclaughlin.tps.utils.SaltGenerator;
 import com.smclaughlin.tps.utils.UUIDGenerator;
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.database.DatabaseSequenceFilter;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.FilteredDataSet;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.filter.ITableFilter;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -39,8 +46,8 @@ import static org.mockito.Matchers.any;
 @RunWith(PowerMockRunner.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
-        TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class,
+        TransactionDbUnitTestExecutionListener.class,
         WithSecurityContextTestExecutionListener.class})
 @PowerMockRunnerDelegate(SpringRunner.class)
 @PowerMockIgnore({"javax.management.*", "javax.crypto.*"})

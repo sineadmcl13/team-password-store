@@ -45,7 +45,7 @@ public class AddAccountGroupController {
     public String postAddGroup(@ModelAttribute(AddAccountGroupModel.KEY) AddAccountGroupModel model,
                                  RedirectAttributes redirectAttributes) {
 
-        groupService.createNewAccountGroup(model.getAccountGroup());
+        groupService.saveAccountGroup(model.getAccountGroup());
         redirectAttributes.addFlashAttribute(FLASH_MESSAGE, new FlashMessage(SUCCESS, "flash.add.account.group.success"));
         return REDIRECT_DASHBOARD;
     }

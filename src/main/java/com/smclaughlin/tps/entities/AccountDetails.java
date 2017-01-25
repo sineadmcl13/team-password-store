@@ -1,6 +1,7 @@
 package com.smclaughlin.tps.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -69,6 +70,13 @@ public class AccountDetails extends AbstractEntity {
         this.passwordHash = passwordHash;
     }
 
+    public AccountGroup getAccountGroup() {
+        return accountGroup;
+    }
+
+    public void setAccountGroup(AccountGroup accountGroup) {
+        this.accountGroup = accountGroup;
+    }
 
     @Override
     public boolean equals(Object o) {
