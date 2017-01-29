@@ -1,7 +1,6 @@
 package com.smclaughlin.tps.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
