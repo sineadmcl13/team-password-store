@@ -1,6 +1,7 @@
 package com.smclaughlin.tps.service;
 
 import com.smclaughlin.tps.entities.User;
+import com.smclaughlin.tps.pojos.UserPojo;
 import com.smclaughlin.tps.repos.IUserRepo;
 import com.smclaughlin.tps.service.security.IPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,16 @@ public class UserService implements IUserService {
         user.setPasswordSalt(salt);
         user.setPasswordHash(hash);
         return user;
+    }
+
+    @Override
+    public boolean checkLoginIsValid(String username, String password) {
+        User u = userRepo.findByUsername(username);
+        return u != null && passwordService.generateHash(u.getPasswordSalt(), password).equals(u.getPasswordHash());
+    }
+
+    @Override
+    public UserPojo returnUserByUsername(String username) {
+        return new UserPojo();
     }
 }

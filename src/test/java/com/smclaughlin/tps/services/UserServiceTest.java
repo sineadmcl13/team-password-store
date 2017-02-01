@@ -9,7 +9,8 @@ import com.smclaughlin.tps.service.IUserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 
 /**
@@ -32,6 +33,15 @@ public class UserServiceTest extends IntegrationTest{
         user.setEmail("test@companyname.com");
 
         userService.createNewUser(user);
+    }
+
+    @Test
+    @DatabaseSetup("/test_db/services/userService/beforeTestCheckValidLogin.xml")
+    public void testCheckLoginIsValid() throws Exception{
+
+        assertThat(userService.checkLoginIsValid("user@test.com", "3Y6QyLpob7LeZtwoxkhQzOP"), equalTo(true));
+        assertThat(userService.checkLoginIsValid("test@test.com", "password"), equalTo(false));
+
     }
 
 

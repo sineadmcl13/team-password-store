@@ -1,5 +1,6 @@
 package com.smclaughlin.tps.security;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.smclaughlin.tps.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,27 +40,29 @@ public class LoginTestController extends IntegrationTest {
 
 
     @Test
+    @DatabaseSetup("/test_db/security/beforeLoginTests.xml")
     public void testInValidLoginDetails() throws Exception{
         mockMvc.perform(formLogin("/login")
-                .user("user")
-                .password("password2"))
+                .user("incorrect@test.com")
+                .password("3Y6QyLpob7LeZtwoxkhQzOP"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(unauthenticated())
                 .andExpect(redirectedUrl("/login?error"));
     }
 
     @Test
+    @DatabaseSetup("/test_db/security/beforeLoginTests.xml")
     public void testValidLoginDetails() throws Exception{
         mockMvc.perform(formLogin("/login")
-                .user("user")
-                .password("password"))
+                .user("user@test.com")
+                .password("3Y6QyLpob7LeZtwoxkhQzOP"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(authenticated().withRoles("USER"))
+                .andExpect(authenticated().withRoles("ADMIN"))
                 .andExpect(redirectedUrl("/"));
     }
 
     @Test
-    @WithMockUser(username="user", roles = "USER")
+    @WithMockUser(username="user", roles = "ADMIN")
     public void testLoginPage() throws Exception{
 
         mockMvc.perform(get("/login"))
@@ -68,7 +71,7 @@ public class LoginTestController extends IntegrationTest {
     }
 
     @Test
-    @WithMockUser(username="user", roles = "USER")
+    @WithMockUser(username="user", roles = "ADMIN")
     public void testOnRootRequest() throws Exception{
 
         mockMvc.perform(get("/"))
@@ -78,7 +81,7 @@ public class LoginTestController extends IntegrationTest {
     }
 
     @Test
-    @WithMockUser(username="user", roles = "USER")
+    @WithMockUser(username="user", roles = "ADMIN")
     public void testLogout() throws Exception{
 
         mockMvc.perform(get("/logout"))
