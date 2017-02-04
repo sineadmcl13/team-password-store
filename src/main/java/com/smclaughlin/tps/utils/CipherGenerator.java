@@ -1,19 +1,23 @@
 package com.smclaughlin.tps.utils;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Security;
 import java.util.Base64;
+
 /**
  * Created by sineadmclaughlin on 11/12/2016.
  */
 public class CipherGenerator {
 
-    private static String INIT_VECTOR = "Te7PrzS1n5tV0cOr";
+    private static final Logger logger = LoggerFactory.getLogger(CipherGenerator.class);
 
+    private static String INIT_VECTOR = "Te7PrzS1n5tV0cOr";
     private static String CIPHER_ENCRYPT_MODE="AES/CBC/PKCS5PADDING";
 
     static {
@@ -33,7 +37,7 @@ public class CipherGenerator {
             return Base64.getEncoder().encodeToString(encrypted);
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.debug("Failed to encrypt password", ex);
         }
 
         return null;
@@ -52,7 +56,7 @@ public class CipherGenerator {
 
             return new String(original).split(key)[1];
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.debug("Failed to decrypt password", ex);
         }
 
         return null;

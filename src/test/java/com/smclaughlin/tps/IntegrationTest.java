@@ -75,6 +75,7 @@ public abstract class IntegrationTest {
         PowerMockito.when(UUIDGenerator.randomUUID()).thenReturn(UUID.fromString("38a5639e-d041-4793-bfce-bccf81016e38"));
         PowerMockito.when(SaltGenerator.generateSalt()).thenReturn("EFyw4yY7mgAkt599");
         PowerMockito.when(CipherGenerator.encrypt(any(), any())).thenReturn("3Y6QyLpob7LeZtwoxkhQzOP");
+        PowerMockito.when(CipherGenerator.decrypt(any(), any())).thenReturn("decryptPassword");
 
     }
 

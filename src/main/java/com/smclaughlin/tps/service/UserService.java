@@ -42,6 +42,6 @@ public class UserService implements IUserService {
 
     @Override
     public UserPojo returnUserByUsername(String username) {
-        return new UserPojo();
+        return new UserPojo(userRepo.findByUsername(username));
     }
 }
