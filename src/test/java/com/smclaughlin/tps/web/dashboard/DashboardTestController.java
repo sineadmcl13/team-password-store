@@ -41,7 +41,7 @@ public class DashboardTestController extends IntegrationTest {
 
 
     @Test
-    @DatabaseSetup("/test_db/web/dashboard/beforeTestDashboardModel.xml")
+    @DatabaseSetup("/test_db/web/dashboard/beforeTestDisplayAccountPassword.xml")
     @DatabaseTearDown
     public void testDisplayAccountPassword() throws Exception{
 
