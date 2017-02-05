@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{templates/masterTemplate}" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<section layout:fragment="custom-content">
+
+    <p>Add new User</p>
+
+    <form action="#" th:action="@{#}" th:object="${addUserModel}" th:class="form-horizontal" method="post">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Forename:</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="forename" th:field="*{user.forename}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Surname:</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="surname" th:field="*{user.surname}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Department:</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="department" th:field="*{user.department}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email:</label>
+            <div class="col-sm-10">
+                <input type="text" th:class="form-control" th:placeholder="email" th:field="*{user.email}" />
+            </div>
+        </div>
+        <button type="submit" th:class="btn">Submit</button>
+    </form>
+
+</section>
+</body>
+</html>

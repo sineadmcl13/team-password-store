@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <User id="1" username="test@test.com" password_hash="3Y6QyLpob7LeZtwoxkhQzOP" password_salt="EFyw4yY7mgAkt599" forename="Joe" surname="Bloggs" department="Finance" email="test@test.com"/>
+    <User id="2" username="test@companyname.com" password_hash="3Y6QyLpob7LeZtwoxkhQzOP" password_salt="EFyw4yY7mgAkt599" forename="Joe" surname="Bloggs" department="Finance" email="test@companyname.com"/>
+</dataset>

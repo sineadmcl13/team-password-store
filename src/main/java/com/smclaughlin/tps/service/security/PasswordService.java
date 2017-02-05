@@ -17,6 +17,11 @@ public class PasswordService implements IPasswordService {
     IAccountDetailsService accountDetailsService;
 
     @Override
+    public String generateTempPassword() {
+        return SaltGenerator.generateSalt();
+    }
+
+    @Override
     public String generatePasswordSalt() {
         return SaltGenerator.generateSalt();
     }

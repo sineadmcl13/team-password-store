@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -37,4 +38,20 @@ public class DashboardTestController extends IntegrationTest {
         List<AccountDetails> accountDetailsList = modelResult.getAccountDetailsList();
         assertThat(accountDetailsList, contains(createTestAccountDetail()));
     }
+
+
+    @Test
+    @DatabaseSetup("/test_db/web/dashboard/beforeTestDisplayAccountPassword.xml")
+    @DatabaseTearDown
+    public void testDisplayAccountPassword() throws Exception{
+
+        String result = mockMvc.perform(get("/account/password/d8b50f71-a69f-4710-a6cf-d0bc8f328e9a"))
+                        .andReturn().getResponse().getContentAsString();
+
+        assertThat(result, equalTo("decryptPassword"));
+    }
+
+
+
+
 }

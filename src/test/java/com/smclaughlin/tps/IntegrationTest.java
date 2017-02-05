@@ -7,12 +7,6 @@ import com.smclaughlin.tps.entities.AccountGroup;
 import com.smclaughlin.tps.utils.CipherGenerator;
 import com.smclaughlin.tps.utils.SaltGenerator;
 import com.smclaughlin.tps.utils.UUIDGenerator;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.DatabaseSequenceFilter;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.FilteredDataSet;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.filter.ITableFilter;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -27,7 +21,6 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -36,7 +29,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.UUID;
 
 import static org.mockito.Matchers.any;
-
 
 /**
  * Created by sineadmclaughlin on 22/11/2016.
@@ -75,8 +67,10 @@ public abstract class IntegrationTest {
         PowerMockito.when(UUIDGenerator.randomUUID()).thenReturn(UUID.fromString("38a5639e-d041-4793-bfce-bccf81016e38"));
         PowerMockito.when(SaltGenerator.generateSalt()).thenReturn("EFyw4yY7mgAkt599");
         PowerMockito.when(CipherGenerator.encrypt(any(), any())).thenReturn("3Y6QyLpob7LeZtwoxkhQzOP");
+        PowerMockito.when(CipherGenerator.decrypt(any(), any())).thenReturn("decryptPassword");
 
     }
+
 
     protected AccountDetails createTestAccountDetail(){
         AccountDetails ac = new AccountDetails();

@@ -6,6 +6,13 @@ package com.smclaughlin.tps.service.security;
  */
 public interface IPasswordService {
 
+
+    /**
+     * Returns a randomly generated string to be used as a temporary password
+     * @return
+     */
+    String generateTempPassword();
+
     /**
      * Returns a randomly generated string to be used as a salt or encryption key
      * @return a string of 16 randomly generated chars
